@@ -148,7 +148,7 @@ while True:
           food_quantity.append(_food_quantity)
           break
         print("Invalid input, Please only input food in menu")
-        print("\n")
+      print("\n")
       
 
       while True:
@@ -202,8 +202,7 @@ while True:
           print(beverage_quantity)
           break
         print("Invalid input, Please only input Beverage in menu")
-        print("\n")
-        
+      print("\n")
 
       while True:
         print("-"*5 + " " + "Silahkan Pilih Menu yang tersedia" + " " + "-"*5)
@@ -237,7 +236,7 @@ while True:
           add_on_quantity.append(_add_on_quantity)
           break
         print("Invalid input, Please only input Add-On in menu")
-        print("\n")
+      print("\n")
         
 
       while True:
@@ -311,8 +310,8 @@ while True:
         print("Total Price: ", format(total_price, ","))
         _customer_cash = int(input("Cash: "))
         total_cash_change = _customer_cash - total_price
-        
-      customer_cash = _customer_cash
+        customer_cash = _customer_cash   
+     
 
       
       print("\n")
@@ -364,6 +363,7 @@ while True:
         print("Cash: ", format(customer_cash, ","))
         print("Change: ",format(total_cash_change, ",")) 
       print("\n")
+      exit()
     case "2":
       print("Thank You  - Umami Resto")
       exit()
