@@ -21,6 +21,9 @@ total_food_price = 0
 total_beverage_price = 0
 total_add_on_price = 0
 
+total_cash_change = 0
+customer_cash = 0
+
 order_menu_food = [
   "Mie Ayam: 16.500",
   "Nasi Goreng: 15.000",
@@ -145,7 +148,7 @@ while True:
           food_quantity.append(_food_quantity)
           break
         print("Invalid input, Please only input food in menu")
-      print("\n")
+        print("\n")
       
 
       while True:
@@ -158,7 +161,7 @@ while True:
           beverage_name = beverage_split[0]
           beverage_without_price.append(beverage_name)
         print("-"*40)
-        _menu_beverage = input("Your Beverage Order [Type 'None' if you don't want to order food]: ").title()
+        _menu_beverage = input("Your Beverage Order [Type 'None' if you don't want to order Beverage]: ").title()
         if _menu_beverage == "None":
           break
         elif _menu_beverage in beverage_without_price:
@@ -199,7 +202,7 @@ while True:
           print(beverage_quantity)
           break
         print("Invalid input, Please only input Beverage in menu")
-      print("\n")
+        print("\n")
         
 
       while True:
@@ -212,7 +215,7 @@ while True:
           add_on_name = add_on_split[0]
           add_on_without_price.append(add_on_name)
         print("-"*40)
-        _menu_add_on = input("Your Add-On Order [Type 'None' if you don't want to order food]: ").title()
+        _menu_add_on = input("Your Add-On Order [Type 'None' if you don't want to order Add On]: ").title()
         if _menu_add_on == "None":
           break
         elif _menu_add_on in add_on_without_price:
@@ -234,11 +237,11 @@ while True:
           add_on_quantity.append(_add_on_quantity)
           break
         print("Invalid input, Please only input Add-On in menu")
-      print("\n")
+        print("\n")
         
 
       while True:
-        _reorder = input("Do you want to add your order [y/n]: ")
+        _reorder = input("Do you want to add another item [y/n]: ")
         print("\n")
         if _reorder == "y" or _reorder == "Y":
           is_reorder = True
@@ -254,19 +257,19 @@ while True:
 
       while True:
         print("-"*5 + " " + "Silahkan Pilih Metode Pembayaran yang tersedia" + " " + "-"*5)
-        for i in range(len(menu_payment_method)):
-          print("~"*3 + "List of Payment Method" + "~"*3)
-          for payment in menu_payment_method:
-            print(payment)
-          print("-"*40)
-          _input_payment_method = input("Your Payment Method: ").title()
-          if _input_payment_method in menu_payment_method:
-            payment_method = _input_payment_method
-            break
-          print("Invalid input, Please only input Add-On in menu")
-          print("\n")
+      
+        print("~"*3 + "List of Payment Method" + "~"*3)
+        for payment in menu_payment_method:
+          print(payment)
+        print("-"*40)
+        _input_payment_method = input("Your Payment Method: ").title()
+        if _input_payment_method in menu_payment_method:
+          payment_method = _input_payment_method
           break
+        print("Invalid input, Please only input Add-On in menu")
+        print("\n")
         break
+        
 
       for sum_food_qty in food_quantity:
         total_food_quantity += sum_food_qty
@@ -300,9 +303,20 @@ while True:
       
       total_items = total_food_quantity + total_beverage_quantity + total_add_on_quantity
       total_price = total_price + (total_food_price + total_beverage_price + total_add_on_price)
+
+      if payment_method == "Cash":
+        print("\n")
+        print("="*15 + " " + "Cash Payment" + " "+ "="*15)
+        print("-"*10)
+        print("Total Price: ", format(total_price, ","))
+        _customer_cash = int(input("Cash: "))
+        total_cash_change = _customer_cash - total_price
+        
+      customer_cash = _customer_cash
+
       
       print("\n")
-      print("="*30 + " " + "RINCIAN PEMESANAN" + " "+ "="*30)
+      print("="*30 + " " + "Order Receipt" + " "+ "="*30)
       print("\n")
       print("Order Date: ", datetime.now())
       print("\n")
@@ -343,7 +357,12 @@ while True:
       print("Total Items: ", total_items)
       print("Total Price: Rp. ", format(total_price, ","))
       print("-"*10)
-      print("Payment Method: ", payment_method)
+      if payment_method == "Qris" or payment_method == "Transfer":
+        print("Payment Method: ", payment_method)
+      else:
+        print("Payment Method: ", payment_method)
+        print("Cash: ", format(customer_cash, ","))
+        print("Change: ",format(total_cash_change, ",")) 
       print("\n")
     case "2":
       print("Thank You  - Umami Resto")
